@@ -2,7 +2,8 @@
     "compilerOptions": {
         "outDir": "dist/js",
         "target": "ES6",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "noImplicitAny": true //Não vai gerar o arquivo js enquanto o arquivo ts apresentar erros.
     },
     "include": ["app/**/*"]
 }
