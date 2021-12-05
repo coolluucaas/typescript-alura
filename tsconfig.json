@@ -4,7 +4,8 @@
         "target": "ES6",
         "noEmitOnError": true, //Não vai gerar o arquivo js enquanto o arquivo ts apresentar erros.
         "noImplicitAny": true, 
-        "removeComments": true
+        "removeComments": true,
+        "strictNullChecks": true
     },
     "include": ["app/**/*"]
 }
