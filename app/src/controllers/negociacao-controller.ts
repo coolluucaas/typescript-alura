@@ -33,7 +33,7 @@ export class NegociacaoController {
         }
         this.negociacoes.adicionar(negociacao)
         this.limparFormulario()
-        this.atualizarView()
+        this.atualizarView() 
     }
 
     private ehDiaUtil(data: Date): boolean {
