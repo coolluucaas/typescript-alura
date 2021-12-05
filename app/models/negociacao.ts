@@ -13,6 +13,17 @@ export class Negociacao {
         const data = new Date(this._data.getTime())
         return data
     }
+
+    public static Criar(
+        inputData: string,
+        inputQuantidade: string,
+        inputValor: string
+    ) {
+        const exp = /-/g
+        const date = new Date(inputData.replace(exp, ','))
+        const quantidade = parseInt(inputQuantidade)
+        const valor = parseFloat(inputValor)
+
+        return new Negociacao(date, quantidade, valor)
+    }
 }
-
-
