@@ -5,15 +5,6 @@ export class Negociacao {
         public readonly valor: number
     ) {}
 
-    get volume(): number {
-        return this.quantidade * this.valor
-    }
-
-    get data(): Date {
-        const data = new Date(this._data.getTime())
-        return data
-    }
-
     public static Criar(
         inputData: string,
         inputQuantidade: string,
@@ -26,4 +17,21 @@ export class Negociacao {
 
         return new Negociacao(date, quantidade, valor)
     }
+
+    get volume(): number {
+        return this.quantidade * this.valor
+    }
+
+    get data(): Date {
+        const data = new Date(this._data.getTime())
+        return data
+    }
+
+    public paraTexto(): string {
+        return `
+        Data: ${this.data},
+        Quantidade: ${this.quantidade},
+        Valor: ${this.valor}
+        `
+    }    
 }
