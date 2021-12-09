@@ -1,9 +1,9 @@
 import { inspect } from '../decorators/inspect.js'
 import { logarTempoDeExecucao } from '../decorators/logar-tempo-de-execucao.js'
 import { DiasDaSemana } from '../enums/dias-da-semana.js'
-import { NegociacaoApiInterface } from '../interfaces/negociacaoApi.js'
 import { Negociacao } from '../models/negociacao.js'
 import { Negociacoes } from '../models/negociacoes.js'
+import { NegociacaoService } from '../services/negociacoes-service.js'
 import { MensagemView } from '../views/mensagem-view.js'
 import { NegociacoesView } from '../views/negociacoes-view.js'
 
@@ -14,6 +14,7 @@ export class NegociacaoController {
     private negociacoes: Negociacoes = new Negociacoes()
     private negociacoesView = new NegociacoesView('#negociacoesView')
     private mensagemView = new MensagemView('#mensagemView')
+    private negociacaoService = new NegociacaoService()
 
     constructor() {
         this.inputData = document.querySelector('#data') as HTMLInputElement
@@ -39,24 +40,20 @@ export class NegociacaoController {
             return
         }
         this.negociacoes.adicionar(negociacao)
+        console.log(negociacao.paraTexto());
+        console.log(this.negociacoes.paraTexto());
         this.limparFormulario()
         this.atualizarView()
     }
 
     importarDados(): void {
-        fetch('http://localhost:8080/dados')
-            .then((res) => res.json())
-            .then((dados: NegociacaoApiInterface[]) => {
-                return dados.map((dado) => {
-                    return new Negociacao(new Date(), dado.vezes, dado.montante)
-                })
-            })
-            .then((negociacoesApi) => {
-                for (let negociacao of negociacoesApi) {
-                    this.negociacoes.adicionar(negociacao)
-                }
-                this.negociacoesView.update(this.negociacoes)
-            })
+        this.negociacaoService.obterNegociacoes()
+        .then((negociacoesApi) => {
+            for (let negociacao of negociacoesApi) {
+                this.negociacoes.adicionar(negociacao)
+            }
+            this.negociacoesView.update(this.negociacoes)
+        })
     }
 
     private ehDiaUtil(data: Date): boolean {
