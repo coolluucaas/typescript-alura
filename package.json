@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "lite-server --baseDir=app",
-    "start": "concurrently \"yarn watch\" \"yarn server\"",
+    "start": "concurrently \"yarn run watch\" \"yarn run server\"",
     "compile": "tsc",
     "watch": "tsc -w"
   },

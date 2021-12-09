@@ -5,7 +5,9 @@
         "noEmitOnError": true, //Não vai gerar o arquivo js enquanto o arquivo ts apresentar erros.
         "noImplicitAny": true, 
         "removeComments": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "experimentalDecorators": true,
+        "sourceMap":true
     },
     "include": ["app/src/**/*"]
 }
